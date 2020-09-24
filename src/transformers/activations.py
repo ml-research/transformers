@@ -4,6 +4,8 @@ import torch
 import torch.nn.functional as F
 
 from .utils import logging
+from pau_torch.pade_activation_unit import PAU
+
 
 
 logger = logging.get_logger(__name__)
@@ -40,6 +42,9 @@ def gelu_fast(x):
     return 0.5 * x * (1.0 + torch.tanh(x * 0.7978845608 * (1.0 + 0.044715 * x * x)))
 
 
+rpau = PAU()
+
+
 ACT2FN = {
     "relu": F.relu,
     "swish": swish,
@@ -47,6 +52,8 @@ ACT2FN = {
     "tanh": torch.tanh,
     "gelu_new": gelu_new,
     "gelu_fast": gelu_fast,
+    "r.pau": rpau,
+    "paus": PAU() 
 }
 
 
