@@ -168,10 +168,10 @@ def mish(x):
     return x * torch.tanh(nn.functional.softplus(x))
 
 
-rpau = PAU()
+rpau = PAU(cuda=False)
 ACT2FN = {"gelu": gelu, "relu": torch.nn.functional.relu,
           "swish": swish, "gelu_new": gelu_new, "mish": mish,
-          "rpau": rpau, "paus": PAU()}
+          "rpau": rpau, "paus": PAU(cuda=False)}
 
 
 BertLayerNorm = torch.nn.LayerNorm
@@ -515,7 +515,7 @@ class BertPooler(nn.Module):
         super().__init__()
         self.dense = nn.Linear(config.hidden_size, config.hidden_size)
         # self.activation = nn.Tanh()
-        self.activation = PAU()
+        self.activation = PAU(cuda=False)
 
     def forward(self, hidden_states):
         # We "pool" the model by simply taking the hidden state corresponding

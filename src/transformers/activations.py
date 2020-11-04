@@ -42,7 +42,7 @@ def gelu_fast(x):
     return 0.5 * x * (1.0 + torch.tanh(x * 0.7978845608 * (1.0 + 0.044715 * x * x)))
 
 
-rpau = PAU()
+rpau = PAU(cuda=False)
 
 
 ACT2FN = {
@@ -53,7 +53,7 @@ ACT2FN = {
     "gelu_new": gelu_new,
     "gelu_fast": gelu_fast,
     "r.pau": rpau,
-    "paus": PAU() 
+    "paus": PAU(cuda=False)
 }
 
 
